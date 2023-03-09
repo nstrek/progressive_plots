@@ -39,7 +39,6 @@ class NodesGenerator:
             raise StopIteration
 
         index = next(self.next_index_generator)
-        # print(self.n, index)
         index = int(index)
 
         self.n += 1
@@ -47,12 +46,8 @@ class NodesGenerator:
         x = self.array_x[index]
         self.array_y[index] = self.func(x)
         self.mask[index] = True
-
-        # print(*self.array_y)
-        # if self.n > 120:
-        #     print(*self.array_y)
-        #     print(*self.array_y[self.mask])
-        return self.array_x[self.mask], self.array_y[self.mask]
+        return {'number': self.n, 'index': index, 'mask': self.mask,
+                'array_x': self.array_x, 'array_y': self.array_y}
 
     def next_index(self):
 
@@ -60,14 +55,6 @@ class NodesGenerator:
 
             for node in self.prev_nodes:
                 c = sum(node) / 2
-
-                # c = np.rint(c)
-
-                # if c - node[0] > 1:
-                #     self.curr_nodes.append((node[0], c))
-                #
-                # if node[1] - c > 1:
-                #     self.curr_nodes.append((c, node[1]))
                 self.curr_nodes.extend([(node[0], c), (c, node[1])])
 
                 yield c
@@ -75,25 +62,3 @@ class NodesGenerator:
             self.prev_nodes = list(self.curr_nodes)
             self.curr_nodes = []
 
-# fig, ax = plt.subplots()
-# xdata, ydata = [], []
-# ln, = ax.plot([], [], 'ro')
-#
-#
-# def init():
-#     ax.set_xlim(0, 2 * 2 * np.pi)
-#     ax.set_ylim(-3, 3)
-#     return ln,
-#
-#
-# def update(frame):
-#     # xdata.append(frame[0])
-#     # ydata.append(frame[1])
-#     # ln.set_data(xdata, ydata)
-#     # print(frame)
-#     return ax.plot(frame[0], frame[1])
-
-# gen = NodesGenerator(start=0, end=2 * 2 * np.pi, degree=7, func=lambda x: np.sin(x) + np.sin(2 * x))
-#
-# ani = FuncAnimation(fig, update, frames=gen, init_func=init, blit=True, repeat=False)
-# plt.show()
