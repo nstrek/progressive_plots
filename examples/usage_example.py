@@ -10,7 +10,7 @@
 #
 # progressive_plot.start(f, M)
 
-from src.ProgressivePlots.main import NodesGenerator
+from src.progressive_plots.main import NodesGenerator
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -74,12 +74,12 @@ def update(frame):
 gen = NodesGenerator(start=start, end=end, degree=degree, func=f)
 
 ani = FuncAnimation(fig, update, frames=gen, init_func=init, blit=True, repeat=False)
-# plt.show()
+plt.show()
 
 from matplotlib import animation
 
-# f = r"D:\PycharmProjects\ProgressivePlots\for_article\anim.html"
+# f = r"D:\PycharmProjects\progressive_plots\for_article\anim.html"
 # writergif = animation.HTMLWriter(fps=30)
 # ani.save(f, writer=writergif)
-f = r"D:\PycharmProjects\ProgressivePlots\for_article\animation.gif"
-ani.save(f, writer='Pillow', fps=30)
+# f = r"D:\PycharmProjects\ProgressivePlots\for_article\animation.gif"
+# ani.save(f, writer='Pillow', fps=30)
